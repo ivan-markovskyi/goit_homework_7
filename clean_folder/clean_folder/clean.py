@@ -160,7 +160,7 @@ def main(folder: Path):
 
 
 def clean_folder():
-    if sys.argv[1]:
+    try:
         folder_for_scan = Path(sys.argv[1])
         main(folder_for_scan.resolve())
         print(f"Images: {IMAGES}")
@@ -169,3 +169,15 @@ def clean_folder():
         print(f"Video: {VIDEO}")
         print(f"Archives: {ARCHIVES}")
         print(f"MY_OTHER: {OTHER}")
+
+    except IndexError:
+        print(
+            "Аргументи командного рядка не містять назву папки, яку потрібно обробити!"
+        )
+
+    except FileNotFoundError:
+        print("Дана папка не існує!")
+
+
+if __name__ == "__main__":
+    clean_folder()
